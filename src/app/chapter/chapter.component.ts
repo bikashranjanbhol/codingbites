@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ContentService } from 'src/services/content.service';
+import * as Prism from 'prismjs';
 
 @Component({
   selector: 'app-chapter',
@@ -14,7 +15,7 @@ export class ChapterComponent implements OnInit, OnChanges {
   title = '';
   pageContent = '';
 
-  constructor(private route: ActivatedRoute, private contentService: ContentService) {}
+  constructor(private route: ActivatedRoute, private contentService: ContentService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     // this.route.paramMap.subscribe(params => {
@@ -43,11 +44,17 @@ export class ChapterComponent implements OnInit, OnChanges {
           console.log('Page', page);
           this.title = page.title.rendered;
           this.pageContent = page.content.rendered;
+          this.cdRef.detectChanges();
+          this.highlightCode();
         },
         error => {
           console.error('Error fetching page:', error);
         }
       );
+  }
+
+  highlightCode() {
+    Prism.highlightAll();
   }
 }
 
