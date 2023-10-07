@@ -1,0 +1,56 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button *ngIf="mobileQuery.matches" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 class="example-app-name logo-title">Coding Bites</h1>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="my-sidenav">
+        <mat-nav-list>
+          <a mat-list-item (click)="navigateToChapter(nav?.id)" [ngClass]="chapterId == nav?.id ? 'active-link' : ''" *ngFor="let nav of fillerNav">{{nav?.title?.rendered}}</a>
+          
+          <a mat-list-item [routerLink]="['/tutorial', subject, nav?.id]" routerLinkActive="active-link" *ngFor="let nav of fillerNav">{{nav?.title?.rendered}}</a>
+        </mat-nav-list>
+      </mat-sidenav> -->
+
+      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+             [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="my-sidenav">
+        <mat-nav-list>
+          <ng-container *ngFor="let nav of fillerNav">
+            <!-- Parent items -->
+            <a mat-list-item (click)="navigateToChapter(nav.id)" 
+              [ngClass]="{
+                'parent-item': true, 
+                'has-children': nav.children && nav.children.length > 0, 
+                'active-link': chapterId == nav.id
+              }">
+              {{nav.name || nav.title?.rendered}}
+            </a>
+            
+            <!-- Child items -->
+            <ng-container *ngIf="nav.children && nav.children.length > 0">
+              <mat-list>
+                <a mat-list-item (click)="navigateToChapter(child.id)" 
+                  [ngClass]="{
+                    'child-item': true, 
+                    'active-link': chapterId == child.id
+                  }" 
+                  *ngFor="let child of nav.children">
+                  {{child.title?.rendered}}
+                </a>
+              </mat-list>
+            </ng-container>
+          </ng-container>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content class="content">
+        <!-- <p *ngFor="let content of fillerContent">{{content}}</p> -->
+        <!-- TEST:: {{chapterId | json}} -->
+        <app-chapter [id]="chapterId"></app-chapter>
+        <!-- <router-outlet></router-outlet> -->
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

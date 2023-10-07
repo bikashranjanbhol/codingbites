@@ -1,0 +1,13 @@
+<div class="drawer bg-gray-100 fixed inset-0 transform transition-transform duration-300 ease-in-out"
+     [ngClass]="{'translate-x-0': isOpen, '-translate-x-full': !isOpen}">
+    <div class="flex justify-end p-4">
+        <button class="text-xl" (click)="toggle()">×</button>
+    </div>
+    <nav class="flex flex-col p-4">
+        <!-- Add drawer items here -->
+        <a href="#" class="py-2">Home</a>
+        <a href="#" class="py-2">About</a>
+        <a href="#" class="py-2">Services</a>
+        <a href="#" class="py-2">Contact</a>
+    </nav>
+</div>
