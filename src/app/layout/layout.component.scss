@@ -1,3 +1,5 @@
+@import '../../styles/codingbites-theme.scss';
+
 .example-container {
   display: flex;
   flex-direction: column;
@@ -8,10 +10,22 @@
   right: 0;
 }
 
+.example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .example-is-mobile .example-toolbar {
   position: fixed;
   /* Make sure the toolbar will stay on top of the content as it scrolls past. */
   z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 h1.example-app-name {
@@ -33,6 +47,8 @@ h1.example-app-name {
 .my-sidenav{
     min-width: 250px;
     max-width: 270px;
+    border: none;
+    background-color: #f2fbf7;
 }
 
 .content{
@@ -48,6 +64,11 @@ h1.example-app-name {
 .logo-title{
   font-size: 1.5em;
   font-weight: 500;
+}
+
+.logo-container{
+  display: flex;
+  align-items: center;
 }
 
 .parent-item {
@@ -71,7 +92,12 @@ h1.example-app-name {
 }
 
 .active-link {
-  background-color: #e0e0e0;
+  // background-color: #e0e0e0;
+  background-color: #111111;
+}
+
+.active-menu-label{
+  color: #fff !important;
 }
 
 /* Optional: Add some color */
@@ -81,4 +107,13 @@ h1.example-app-name {
 
 .child-item {
   color: #34495e;
+}
+
+.active-header-menu-max{
+  background-color: #111111;
+}
+
+.active-header-menu-min{
+  background-color: #111111;
+  color: #fff;
 }

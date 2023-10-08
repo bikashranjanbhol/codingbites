@@ -1,11 +1,26 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-toolbar color="primary" class="example-toolbar">
-      <button *ngIf="mobileQuery.matches" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name logo-title">Coding Bites</h1>
+      <div class="logo-container">
+        <button *ngIf="mobileQuery.matches" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <span class="example-app-name logo-title">Coding Bites</span>
+      </div>
+      <div *ngIf="!isSmallScreen" class="example-button-row">
+        <a mat-button [ngClass]="{'active-header-menu-max': category?.slug == subject}" *ngFor="let category of categories" (click)="navigateToSubject(category.slug)">{{category.name}}</a>
+      </div>
+      <div *ngIf="isSmallScreen">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [ngClass]="{'active-header-menu-min': category?.slug == subject}" *ngFor="let category of categories" (click)="navigateToSubject(category.slug)">
+            <span>{{category?.name}}</span>
+          </button>
+        </mat-menu>
+      </div>
     </mat-toolbar>
+    <mat-toolbar></mat-toolbar>
   
-    <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav-container class="example-sidenav-container">
       <!-- <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" class="my-sidenav">
         <mat-nav-list>
@@ -26,7 +41,7 @@
                 'has-children': nav.children && nav.children.length > 0, 
                 'active-link': chapterId == nav.id
               }">
-              {{nav.name || nav.title?.rendered}}
+              <span [ngClass]="{'active-menu-label': chapterId == nav.id}">{{nav.name || nav.title?.rendered}}</span>
             </a>
             
             <!-- Child items -->
@@ -38,7 +53,7 @@
                     'active-link': chapterId == child.id
                   }" 
                   *ngFor="let child of nav.children">
-                  {{child.title?.rendered}}
+                  <span [ngClass]="{'active-menu-label': chapterId == child.id}">{{child.title?.rendered}}</span>
                 </a>
               </mat-list>
             </ng-container>
