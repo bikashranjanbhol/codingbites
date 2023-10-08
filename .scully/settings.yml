@@ -1,0 +1,12 @@
+identifier: lfncgcz7lct8l5y4
+appPort: 1864
+staticPort: 1668
+reloadPort: 2667
+hostName: localhost
+projectName: codingbites_client
+homeFolder: >-
+  /Users/annapoornakandala/Workspace/Bikash_Workspace/Coding_Bites_Angular/codingbites_client
+distFolder: dist/codingbites_client
+outDir: >-
+  /Users/annapoornakandala/Workspace/Bikash_Workspace/Coding_Bites_Angular/codingbites_client/dist/static
+handle404: ''
