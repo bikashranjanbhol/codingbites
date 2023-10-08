@@ -3,6 +3,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChil
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContentService } from 'src/services/content.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 /** @title Responsive sidenav */
 @Component({
@@ -30,10 +31,12 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   chapterId: string | number | null = null;
   subject: string = '';
+  isSmallScreen: boolean = false;
+  categories: any[] = [];
 
   private _mobileQueryListener: () => void;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private route: ActivatedRoute, private contentService: ContentService, private router: Router) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private route: ActivatedRoute, private contentService: ContentService, private router: Router, private breakpointObserver: BreakpointObserver) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -55,6 +58,19 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     //     }
     //   );
     // });
+
+    this.breakpointObserver.observe([
+      Breakpoints.Handset,
+      Breakpoints.Tablet
+    ]).subscribe(result => {
+      this.isSmallScreen = result.matches;
+    });
+
+    this.contentService.getCategories().subscribe(
+      data => this.categories = data,
+      error => console.error(error)
+    );
+
     const subject = this.route.snapshot.paramMap.get('subject');
     const chapter = this.route.snapshot.paramMap.get('chapter');
     if(subject){
@@ -107,6 +123,10 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+  navigateToSubject(slug: string){
+    this.router.navigate(['/tutorial', slug]);
   }
 
   navigateToChapter(chapterId: string | number) {

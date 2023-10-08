@@ -1,0 +1,123 @@
+@import './codingbites-theme.scss';
+
+.wp-content > *{
+    margin: 0.975em 0;  
+    line-height: 1.75;
+    word-spacing: 1.6px;
+    font-size: .975em;
+  }
+  
+  .wp-content .emphasise{
+    background: pink;
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+  }
+  
+  .wp-content .wp-block-code{
+    background: #f1f0f0;
+    padding: 1em;
+    border-radius: 12px;
+    white-space: pre-wrap;
+  }
+  
+  .wp-content .has-inline-color{
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+  }
+  
+  .wp-content table{
+      border: 1px solid #cec3c3;
+  }
+  
+  .wp-content table td, th{
+      border: 1px solid #cec3c3;
+      padding: 0.25rem 0.75rem;
+  }
+  
+  .wp-content h2.wp-block-heading{
+    font-size: 1.45em;
+    font-weight: 600;
+    // margin-left: 0.65em;
+  }
+  
+ .wp-content > p > code, .wp-content > ul > li > code{
+    background: pink;
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+  }
+  
+  .wp-content > ul > li{
+    list-style: disc;
+    margin: 0 1em;
+  }
+  
+  .wp-content > ul > li > a{
+    text-decoration: underline;
+    text-decoration-color: pink;
+    font-weight: 500;
+  }
+
+  .wp-content .wp-block-image{
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wp-content .wp-block-image > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wp-content {
+    
+    .wp-block-quote {
+        padding: 1em;
+        margin: 2em 0;
+        border-left: 4px solid #3498db; /* Change color to suit your theme */
+        background-color: #f9f9f9; /* Light grey background */
+        font-style: italic;
+        color: #333;
+        font-size: 1.25em;
+        position: relative;
+    }
+    
+    .wp-block-quote:before {
+        content: "“";
+        position: absolute;
+        font-size: 3em;
+        left: 10px;
+        top: -10px;
+        color: #3498db; /* Change color to suit your theme */
+    }
+    
+    .wp-block-quote:after {
+        content: "”";
+        position: absolute;
+        font-size: 3em;
+        right: 10px;
+        bottom: -10px;
+        color: #3498db; /* Change color to suit your theme */
+    }
+    
+    .wp-block-quote cite {
+        display: block;
+        margin-top: 10px;
+        font-style: normal;
+        font-size: 1em;
+        color: #777;
+        text-align: right;
+    }
+    
+    .wp-block-quote cite:before {
+        content: '— ';
+    }
+
+    pre{
+        // background-color: mat-color($app-primary, 0.08) !important;
+        font-size: 0.975em !important;
+    }
+    
+  }

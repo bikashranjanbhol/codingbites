@@ -18,6 +18,10 @@ export class ContentService {
     return this.http.get<any>(`${this.apiUrl}/posts/${id}`);
   }
 
+  getCategories(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/categories?parent=0&_fields=name,id,slug`);
+  }
+
   getPostsByCategorySlug(slug: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/categories/?slug=${slug}`);
   }
